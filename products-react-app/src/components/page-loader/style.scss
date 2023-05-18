@@ -1,0 +1,72 @@
+.P-page-loader {
+    position         : fixed;
+    width            : 100%;
+    height           : 100vh;
+    left             : 0;
+    top              : 0;
+    background-color : #0d9a9a;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+  
+    .P-loader-1 {
+      width                     : 60px;
+      height                    : 60px;
+      display                   : block;
+      border-radius             : 50%;
+      border                    : 3px solid wheat;
+      border-left               : none;
+      border-right              : none;
+      animation-name            : rotateLoader;
+      transition                : 0.3s;
+      animation-duration        : 2s;
+      animation-iteration-count : infinite;
+      animation-timing-function : linear;
+      align-items      : center;
+      justify-content  : center;
+    }
+    .P-loader-2 {
+      width                     : 30px;
+      height                    : 30px;
+      display                   : block;
+      border-radius             : 50%;
+      border                    : 3px solid wheat;
+      border-left               : none;
+      border-right              : none;
+      animation-name            : rotateLoader2;
+      transition                : 0.3s;
+      animation-duration        : 1s;
+      animation-iteration-count : infinite;
+      animation-timing-function : linear;
+    }
+  }
+  
+  @keyframes rotateLoader {
+    0% {
+      transform    : rotate(0);
+      border-color : wheat;
+    }
+    50% {
+      transform    : rotate(180deg);
+      border-color : brown;
+    }
+    100% {
+      transform    : rotate(360deg);
+      border-color : wheat;
+    }
+  }
+  
+  @keyframes rotateLoader2 {
+    0% {
+      transform    : rotate(0);
+      border-color : brown;
+    }
+    50% {
+      transform    : rotate(-180deg);
+      border-color : wheat;
+    }
+    100% {
+      transform    : rotate(-360deg);
+      border-color : brown;
+    }
+  }

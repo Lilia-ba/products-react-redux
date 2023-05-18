@@ -1,0 +1,34 @@
+
+.P-login-block {
+    width            : 100%;
+    height           : 100vh;
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    background-color : #226565;
+}
+
+.P-login-box {
+    display          : flex;
+    flex-direction   : column;
+    padding          : 15px;
+    background-color : white;
+}
+.login-input {
+    width         : 100%;
+    padding       : 10px;
+    margin-bottom : 10px;
+    border        : 1px solid #cccccc;
+    border-radius : 5px;
+  }
+  
+  .login-button {
+     margin-top      : 10px;
+     background-color : #0d9a9a;
+     color            : #ffffff;
+     border           : none;
+     border-radius    : 5px;
+     padding          : 10px;
+    cursor           : pointer;
+  }
+  

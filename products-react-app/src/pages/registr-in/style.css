@@ -1,0 +1,33 @@
+.P-registration-block {
+    width            : 100%;
+    height           : calc(100vh - 62px);
+    display          : flex;
+    align-items      : center;
+    justify-content  : center;
+    background-color : #226565;
+}
+
+.P-registration-box {
+    display          : flex;
+    flex-direction   : column;
+    padding          : 15px;
+    background-color : white;
+}
+.registration-input {
+    width         : 100%;
+    padding       : 10px;
+    margin-bottom : 10px;
+    border        : 1px solid #cccccc;
+    border-radius : 5px;
+  }
+  
+  .registration-button {
+    margin-top      : 10px;
+background-color : #0d9a9a;
+  color            : #ffffff;
+  border           : none;
+  border-radius    : 5px;
+  padding          : 10px;
+  cursor           : pointer;
+  }
+  
