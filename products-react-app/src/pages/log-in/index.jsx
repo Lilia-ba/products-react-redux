@@ -1,8 +1,9 @@
-import './style.css'
+import './style.scss'
 import {useState} from "react";
 import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
+
 
 const LogIn = () => {
   const dispatch = useDispatch()
@@ -33,12 +34,12 @@ const LogIn = () => {
   return <div className='P-login-block'>
     <div className='P-login-box'>
       <label>
-        <input name={'email'} onChange={handleChange} type="text" placeholder='email'/>
+        <input name={'email'} onChange={handleChange} type="text" className='login-input' placeholder='email'/>
       </label>
       <label>
-        <input name={'password'} onChange={handleChange} type="password" placeholder={'Password'}/>
+        <input name={'password'} onChange={handleChange} type="password" className='login-input' placeholder={'Password'}/>
       </label>
-      <button onClick={handleClick}>Log in</button>
+      <button className='login-button' onClick={handleClick}>Log in</button>
       <p>Not a member? <NavLink to={'/registration'}>Registration</NavLink></p>
     </div>
   </div>

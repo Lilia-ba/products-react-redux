@@ -1,88 +1,85 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import axios from 'axios';
+import './style.scss';
+import ProductDialog from "../product-dialog";
 
-import './style.scss'
-import useManageProduct from "./use-manage-product";
+const ProductList = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.productReducer);
+  const [editState, setEditState] = useState({
+    categories: [],
+  });
 
-const ProductModal = () => {
-  const {
-    showModal,
-    setShowModal,
-    categories,
-    formData,
-    handleSave,
-    handleChange,
-    handleCategoryChange,
-    uploadImage
-  } = useManageProduct()
+  const [isOpenModal, setISOpenModal] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState(null)
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await axios.get(
+        'https://crudcrud.com/api/54b7434fe7b8437b854d954f91ddf9c4/products'
+      );
+      dispatch({type: 'FETCH_PRODUCTS', payload: response.data});
+    };
+
+    const fetchCategories = async () => {
+      const response = await axios.get(
+        'https://crudcrud.com/api/54b7434fe7b8437b854d954f91ddf9c4/categories'
+      );
+      setEditState((prevState) => ({
+        ...prevState,
+        categories: response.data,
+      }));
+    };
+
+    fetchProducts();
+    fetchCategories();
+  }, [dispatch]);
+
+  const handleDeleteProduct = async (productId) => {
+    await axios.delete(
+      `https://crudcrud.com/api/54b7434fe7b8437b854d954f91ddf9c4/products/${productId}`
+    );
+    dispatch({type: 'DELETE_PRODUCT', payload: productId});
+  };
+
+
+  const handleEditProduct = (data)=>{
+    setSelectedProduct(data)
+    setISOpenModal(true)
+  }
 
   return (
-    <div>
-      <button className="open-modal-btn" onClick={() => setShowModal(true)}>
-        Create Product
-      </button>
-      {showModal && (
-        <div className="modal">
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Product Name"
-            className="modal-input"
-          />
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Product Description"
-            className="modal-input"
-          />
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            placeholder="Product Price"
-            className="modal-input"
-          />
-          <input
-            type="file"
-            accept="image/*"
-            name="image"
-            onChange={uploadImage}
-            className="modal-input"
-          />
-          {formData.image && (
-            <img
-              src={formData.image}
-              alt="Selected Product"
-              className="modal-image"
-            />
-          )}
-          <select
-            value={formData.category.id}
-            onChange={handleCategoryChange}
-            className="modal-input"
-          >
-            <option value="">Select Category</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id} name={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-          <div className="modal-buttons">
-            <button className="save-btn" onClick={handleSave}>
-              Save
-            </button>
-            <button className="cancel-btn" onClick={() => setShowModal(false)}>
-              Cancel
-            </button>
+    <div className="product-list">
+      <h2>Products</h2>
+      <div className="product-items">
+        {products.map((product) => (
+          <div className="P-padding-product" key={product._id}>
+            <div className="product-item">
+              <div
+                className="product-image"
+                style={{backgroundImage: `url('${product.image}')`}}
+              />
+              <h1>{product.name}</h1>
+              <p>{product.category.name}</p>
+              <p>{product.description}</p>
+              <p>{product.price} AMD</p>
+              <div className="product-buttons">
+                <button className='delete-button' onClick={() => handleDeleteProduct(product._id)}>Delete</button>
+                <button className='edit-button' onClick={() => handleEditProduct(product)}>Edit</button>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        ))}
+      </div>
+
+      {isOpenModal? <ProductDialog selectedProduct={selectedProduct} closeModal={()=>setISOpenModal(false)}/>: null}
     </div>
   );
 };
 
-export default ProductModal;
+export default ProductList;
+
+
+
+
