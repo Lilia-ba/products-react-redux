@@ -1,11 +1,10 @@
 import React, {useState} from "react"
 import axios from "axios"
 import {useDispatch} from "react-redux"
-import {NavLink, useNavigate} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 import "./style.scss"
 const Registration = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     firstname: "",
@@ -15,16 +14,13 @@ const Registration = () => {
     gender: "male",
   })
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value})
+       setFormData({...formData, [e.target.name]: e.target.value})
   }
   const handleSubmit = async (e) => {
     const response = await axios.post("https://crudcrud.com/api/54b7434fe7b8437b854d954f91ddf9c4/registration", formData);
     // dispatch({type: "REGISTER_SUCCESS", payload: response.data});
     console.log(response.data)
-    if(response.data){
-      navigate('/login')
-      window.location.open('','_blank')
-    }
+   
     setFormData({
       firstname: "",
       lastname: '',

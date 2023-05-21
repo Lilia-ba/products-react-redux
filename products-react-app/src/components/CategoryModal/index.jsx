@@ -35,6 +35,7 @@ const CategoryModal = () => {
       </div>
     )}
   </div>
+  
 );
 };
 

@@ -16,15 +16,11 @@ const ProductList = () => {
     editedPrice: '',
     editedImage: null,
     categories: [],
-
-
-  })
+  });
 
   useEffect(() => {
     const fetchProducts = async () => {
-    
-
-            const response = await axios.get(
+      const response = await axios.get(
                 'https://crudcrud.com/api/54b7434fe7b8437b854d954f91ddf9c4/products'
               );
               dispatch({ type: 'FETCH_PRODUCTS', payload: response.data });

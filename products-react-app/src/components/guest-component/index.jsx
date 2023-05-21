@@ -13,7 +13,7 @@ const GuestComponent = () => {
   const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const location = useLocation();
-  const isLogin = location.pathname === '/login';
+  const isHomePage = location.pathname === '/';
   return <>
     <header>
       <nav>
@@ -21,7 +21,7 @@ const GuestComponent = () => {
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
-          {!isLogin ? (
+          {isHomePage ? (
             <li>
               <NavLink to="/login">Login</NavLink>
             </li>
